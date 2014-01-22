@@ -26,11 +26,15 @@ def index():
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
-	# output = ordrin_api.delivery_list("ASAP", "170 E 6th Street", "Claremont", "91711")
+	text = request.form["Body"]
+
+	#split on commas
+	address = text.split(",")
+	output = ordrin_api.delivery_list("ASAP", address[0], address[1], address[2])
 	# text_body = createText(output)
 	resp = twilio.twiml.Response()
-	text = request.form["Body"]
-	resp.message(text)
+	
+	resp.message(createText(output))
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 
