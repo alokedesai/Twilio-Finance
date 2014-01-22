@@ -23,16 +23,16 @@ def createText(result):
 @app.route("/")
 def index():
 	return "index"
-@app.route("/sms", methods=["GET", "POST"])
+@app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
 	# output = ordrin_api.delivery_list("ASAP", "170 E 6th Street", "Claremont", "91711")
 	# text_body = createText(output)
 	resp = twilio.twiml.Response()
-	# text = request.form["Body"]
-	resp.sms("test")
+	text = request.form["Body"]
+	resp.message(text)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
-	return str("test")
+	return str(resp)
 
 if __name__ == '__main__':
     app.run(debug=True)
