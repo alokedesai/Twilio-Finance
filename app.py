@@ -20,8 +20,11 @@ def createText(result):
 		# new line for text
 		output += "\n"
 	return output
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
+	return "index"
+@app.route("/sms", methods=["GET", "POST"])
+def sms():
 	# query HackFood to get possible delivery
 	output = ordrin_api.delivery_list("ASAP", "170 E 6th Street", "Claremont", "91711")
 	text_body = createText(output)
