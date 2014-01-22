@@ -20,15 +20,16 @@ def createText(result):
 		# new line for text
 		output += "\n"
 	return output
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
 	# query HackFood to get possible delivery
 	output = ordrin_api.delivery_list("ASAP", "170 E 6th Street", "Claremont", "91711")
 	text_body = createText(output)
 	resp = twilio.twiml.Response()
-	resp.message("Hello")
+	text = request.values.get("Body", None)
+	resp.message(text)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
-	return str(resp)
+	return str(text)
 
 if __name__ == '__main__':
     app.run(debug=True)
