@@ -30,7 +30,7 @@ def sms():
 
 	#split on commas
 	address = text.split(",")
-	output = ordrin_api.delivery_list("ASAP", address[0], address[1], address[2])
+	output = ordrin_api.delivery_list("ASAP", address[0].strip(), address[1].strip(), address[2].strip())
 	# text_body = createText(output)
 	resp = twilio.twiml.Response()
 	
