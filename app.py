@@ -26,7 +26,7 @@ def index():
 	output = ordrin_api.delivery_list("ASAP", "170 E 6th Street", "Claremont", "91711")
 	text_body = createText(output)
 	resp = twilio.twiml.Response()
-	text = request.values.get("Body", None)
+	text = request.values.get("Body", "tes")
 	resp.message(text)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(text)
