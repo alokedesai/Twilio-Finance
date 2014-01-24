@@ -33,6 +33,7 @@ def sms():
 		text = text.replace("change" , "")
 
 		output = ""
+		companies = text.split(",")
 		for company in companies:
 			output += company.strip().upper() + ": " + ystockquote.get_change_percent_change(company.strip()) + "\n"
 		resp = twilio.twiml.Response()
