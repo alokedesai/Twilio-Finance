@@ -24,12 +24,35 @@ def createText(result):
 def index():
 	# return str(ystockquote.get_last_trade_price("AAPL"))
 	return "test"
+
+@app.route("/<ticker>")
+def ticker(ticker):
+	text = str(ticker)
+
+	if (text.startswith("change")):
+		text = text.replace("change" , "")
+
+		output = ""
+		companies = text.split(",")
+		for company in companies:
+			output += company.strip().upper() + ": " + ystockquote.get_change_percent_change(company.strip()) + "\n"
+		resp = twilio.twiml.Response()
+		resp.message(output)
+	else:
+		companies = text.split(",")
+		output = ""
+		for company in companies:
+			output += company.strip().upper() + ": " + ystockquote.get_last_trade_price(company.strip()) + "\n"
+		resp = twilio.twiml.Response()
+		resp.message(output)
+	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
+	return str(resp)
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
-	text = request.form["Body"]
+	text = str(request.form["Body"])
 
-	if (text.startwith("change ")):
+	if (text.startswith("change ")):
 		text = text.replace("change" , "")
 
 		output = ""
