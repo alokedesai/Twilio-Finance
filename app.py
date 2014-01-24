@@ -37,11 +37,18 @@ def sms():
 		resp = twilio.twiml.Response()
 		resp.message(output)
 		return str(resp)
-	output = createText(ystockquote.get_last_trade_price, text.split(","))
-	resp = twilio.twiml.Response()
-	resp.message(output)
-
-	return str(resp)
+	elif (text.startswith("pe ")):
+		text = text.replace("pe", "")
+		companies = text.split(",")
+		output - createText(ystockquote.get_pe, companies)
+		resp = twilio.twiml.Response()
+		resp.message(output)
+		return str(resp)
+	else:
+		output = createText(ystockquote.get_last_trade_price, text.split(","))
+		resp = twilio.twiml.Response()
+		resp.message(output)
+		return str(resp)
 	
 	# if (text.startswith("change ")):
 	# 	text = text.replace("change","")
