@@ -35,7 +35,7 @@ def sms():
 
 	resp = twilio.twiml.Response()
 	
-	resp.message(ystockquote.get_last_trade_price(text)
+	resp.message(ystockquote.get_last_trade_price(text))
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 @app.route("/test")
