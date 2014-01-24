@@ -22,7 +22,8 @@ def createText(result):
 	return output
 @app.route("/")
 def index():
-	return str(ystockquote.get_last_trade_price("AAPL"))
+	# return str(ystockquote.get_last_trade_price("AAPL"))
+	return "test"
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
