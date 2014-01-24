@@ -22,11 +22,7 @@ def createText(result):
 	return output
 @app.route("/")
 def index():
-	rest = ordrin_api.restaurant_details("147")
-	output = ""
-	for item in rest["menu"]:
-		output += item["name"] + " , "
-	return output
+	return str(ystockquote.get_last_trade_price("AAPL"))
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
@@ -38,7 +34,7 @@ def sms():
 
 	resp = twilio.twiml.Response()
 	
-	resp.message(ystockquote.get_price_book(text))
+	resp.message(ystockquote.get_last_trade_price("AAPL"))
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 
