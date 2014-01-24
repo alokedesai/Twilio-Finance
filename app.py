@@ -34,10 +34,7 @@ def sms():
 	if len(companies) == 1:
 
 		text = text.strip().upper()
-
-
 		resp = twilio.twiml.Response()
-		
 		resp.message(ystockquote.get_last_trade_price(text))
 	else:
 		output = ""
@@ -47,11 +44,7 @@ def sms():
 		resp.message(output)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
-@app.route("/test")
-def test():
-	return (ystockquote.get_last_trade_price("AAPL"))
-	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
-	return str(resp)
+ 
 
 if __name__ == '__main__':
     app.run(debug=True)
