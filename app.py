@@ -18,7 +18,7 @@ client = TwilioRestClient(account_sid, auth_token)
 def createText(method, companies):
 	output = ""
 	for company in companies:
-		output += company.strip() + ": " + method(company.strip()) + "\n"
+		output += company.strip().upper() + ": " + method(company.strip()) + "\n"
 	return output
 @app.route("/")
 def index():
@@ -31,6 +31,12 @@ def sms():
 	# query HackFood to get possible delivery
 	text = str(request.form["Body"].lower())
 
+	if (text.startswith("change ")):
+		text = text.replace("change", "")
+		output = createText(ystockquote.get_change_percent_change, text.split(","))
+		resp = twilio.twiml.Response()
+		resp.message(output)
+		return str(resp)
 	output = createText(ystockquote.get_last_trade_price, text.split(","))
 	resp = twilio.twiml.Response()
 	resp.message(output)
