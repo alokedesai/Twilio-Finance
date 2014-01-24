@@ -3,7 +3,7 @@ import ordrin
 from twilio.rest import TwilioRestClient
 import twilio.twiml
 import ystockquote
-from twilio-info import *
+from twilioInfo import *
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.do')
