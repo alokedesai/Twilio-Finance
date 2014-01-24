@@ -29,14 +29,16 @@ def sms():
 	# query HackFood to get possible delivery
 	text = request.form["Body"]
 
-	# #format string
-	companies = text.split(",")
-	if len(companies) == 1:
+	if (text.startwith("change ")):
+		text = text.replace("change" , "")
 
-		text = text.strip().upper()
+		output = ""
+		for company in companies:
+			output += company.strip().upper() + ": " + ystockquote.get_change_percent_change(company.strip()) + "\n"
 		resp = twilio.twiml.Response()
-		resp.message(ystockquote.get_last_trade_price(text))
+		resp.message(output)
 	else:
+		companies = text.split(",")
 		output = ""
 		for company in companies:
 			output += company.strip().upper() + ": " + ystockquote.get_last_trade_price(company.strip()) + "\n"
