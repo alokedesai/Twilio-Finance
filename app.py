@@ -40,7 +40,7 @@ def sms():
 	elif (text.startswith("pe ")):
 		text = text.replace("pe", "")
 		companies = text.split(",")
-		output - createText(ystockquote.get_pe, companies)
+		output = createText(ystockquote.get_pe, companies)
 		resp = twilio.twiml.Response()
 		resp.message(output)
 		return str(resp)
