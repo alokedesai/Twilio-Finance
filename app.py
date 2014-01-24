@@ -30,12 +30,21 @@ def sms():
 	text = request.form["Body"]
 
 	# #format string
-	text = text.strip().upper()
+	companies = text.split(",")
+	if len(companies) == 1:
+
+		text = text.strip().upper()
 
 
-	resp = twilio.twiml.Response()
-	
-	resp.message(ystockquote.get_last_trade_price(text))
+		resp = twilio.twiml.Response()
+		
+		resp.message(ystockquote.get_last_trade_price(text))
+	else:
+		output = ""
+		for company in companies:
+			output += company + ": " + ystockquote.get_last_trade_price(company.strip())
+		resp = twilio.twiml.Response()
+		resp.message(output)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 @app.route("/test")
