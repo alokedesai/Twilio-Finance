@@ -35,7 +35,7 @@ def sms():
 	resp = twilio.twiml.Response()
 	resp.message(output)
 
-	return str(output)
+	return str(resp)
 	
 	# if (text.startswith("change ")):
 	# 	text = text.replace("change","")
