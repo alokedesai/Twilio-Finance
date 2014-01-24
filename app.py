@@ -30,12 +30,16 @@ def index():
 def sms():
 	# query HackFood to get possible delivery
 	text = str(request.form["Body"].lower())
-	companies = text.split(",")
+	
 	if (text.startswith("change ")):
+		text = text.replace("change","")
+		companies = text.split(",")
 		output = createText(ystockquote.get_change_percent_change, companies)
 		resp = twilio.twiml.Response()
 		resp.message(output)
 	elif (text.startswith("pe ")):
+		text = text.replace("pe","")
+		companies = text.split(",")
 		output = createText(ystockquote.get_pe, companies)
 		resp = twilio.twiml.Response()
 		resp.message(output)
