@@ -27,22 +27,20 @@ def index():
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
-	# text = request.form["Body"]
+	text = request.form["Body"]
 
 	# #format string
-	# text = text.strip().upper()
+	text = text.strip().upper()
 
 
 	resp = twilio.twiml.Response()
 	
-	resp.message(ystockquote.get_last_trade_price("AAPL"))
+	resp.message(ystockquote.get_last_trade_price(text)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 @app.route("/test")
 def test():
-	resp = twilio.twiml.Response()
-	
-	resp.message(ystockquote.get_last_trade_price("AAPL"))
+	return (ystockquote.get_last_trade_price("AAPL"))
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 
