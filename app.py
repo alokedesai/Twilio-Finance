@@ -42,7 +42,7 @@ def sms():
 	else:
 		output = ""
 		for company in companies:
-			output += company + ": " + ystockquote.get_last_trade_price(company.strip())
+			output += company.strip().upper() + ": " + ystockquote.get_last_trade_price(company.strip()) + "\n"
 		resp = twilio.twiml.Response()
 		resp.message(output)
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
