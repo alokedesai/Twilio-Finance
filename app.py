@@ -25,7 +25,7 @@ def createText(result):
 @app.route("/")
 def index():
 	# return str(ystockquote.get_last_trade_price("AAPL"))
-	return "test"
+	return "Index"
 
 
 @app.route("/sms", methods=["POST"])
