@@ -50,7 +50,7 @@ def ticker(ticker):
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
-	text = str(request.form["Body"])
+	text = str(request.form["Body"].lower())
 
 	if (text.startswith("change ")):
 		text = text.replace("change" , "")
