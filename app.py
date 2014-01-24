@@ -3,15 +3,17 @@ import ordrin
 from twilio.rest import TwilioRestClient
 import twilio.twiml
 import ystockquote
+from twilio-info import *
+
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.do')
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 ordrin_api = ordrin.APIs("aDn9SOwqDwmdmAmi8Qcb-LGre8M5sY_-q15dXet9zVw")
 
 
-# Twilio Information
-account_sid = "AC48821ab395054c9d8a5f4bc69ec165f8"
-auth_token = "bfc8dcab5be8bbf054c8c8e8c19aadc9"
+
+
+
 client = TwilioRestClient(account_sid, auth_token)
 def createText(result):
 	output = ""
