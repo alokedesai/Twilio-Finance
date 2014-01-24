@@ -30,25 +30,31 @@ def index():
 def sms():
 	# query HackFood to get possible delivery
 	text = str(request.form["Body"].lower())
+
+	output = createText(ystockquote.get_last_trade_price, text.split(","))
+	resp = twilio.twiml.Response()
+	resp.message(output)
+
+	return str(output)
 	
-	if (text.startswith("change ")):
-		text = text.replace("change","")
-		companies = text.split(",")
-		output = createText(ystockquote.get_change_percent_change, companies)
-		resp = twilio.twiml.Response()
-		resp.message(output)
-	elif (text.startswith("pe ")):
-		text = text.replace("pe","")
-		companies = text.split(",")
-		output = createText(ystockquote.get_pe, companies)
-		resp = twilio.twiml.Response()
-		resp.message(output)
-	else:
-		output = createText(ystockquote.get_last_trade_price, companies)
-		resp = twilio.twiml.Response()
-		resp.message(output)
-	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
-	return str(resp)
+	# if (text.startswith("change ")):
+	# 	text = text.replace("change","")
+	# 	companies = text.split(",")
+	# 	output = createText(ystockquote.get_change_percent_change, companies)
+	# 	resp = twilio.twiml.Response()
+	# 	resp.message(output)
+	# elif (text.startswith("pe ")):
+	# 	text = text.replace("pe","")
+	# 	companies = text.split(",")
+	# 	output = createText(ystockquote.get_pe, companies)
+	# 	resp = twilio.twiml.Response()
+	# 	resp.message(output)
+	# else:
+	# 	output = createText(ystockquote.get_last_trade_price, companies)
+	# 	resp = twilio.twiml.Response()
+	# 	resp.message(output)
+	# # message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
+	# return str(resp)
  
 
 if __name__ == '__main__':
