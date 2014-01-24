@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, Response
 import ordrin
 from twilio.rest import TwilioRestClient
 import twilio.twiml
-
+import ystockquote
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.do')
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
@@ -22,19 +22,23 @@ def createText(result):
 	return output
 @app.route("/")
 def index():
-	return "index"
+	rest = ordrin_api.restaurant_details("147")
+	output = ""
+	for item in rest["menu"]:
+		output += item["name"] + " , "
+	return output
 @app.route("/sms", methods=["POST"])
 def sms():
 	# query HackFood to get possible delivery
 	text = request.form["Body"]
 
-	#split on commas
-	address = text.split(",")
-	output = ordrin_api.delivery_list("ASAP", address[0].strip(), address[1].strip(), address[2].strip())
-	# text_body = createText(output)
+	#format string
+	text = text.strip().upper()
+
+
 	resp = twilio.twiml.Response()
 	
-	resp.message(createText(output))
+	resp.message(ystockquote.get_price_book(text))
 	# message = client.messages.create(to="+15135605548", from_="+15132838068", body= text_body)
 	return str(resp)
 
