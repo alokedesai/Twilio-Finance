@@ -23,13 +23,18 @@ To access the nominal and percent change of a company during the current busines
     AAPL: 546.07
     
     Text:
+    price AAPL
+    Reponse:
+    AAPL: 546.07
+    
+    Text:
     change TWTR, AAPL
     Reponse:
     TWTR: "-1.06 - -1.69%"
     AAPLE: "-10.11" - -1.82%"
    
 ##Suported Methods
-* Current Price: no method
+* Current Price: `price` or no method
 * Change (% & $): `change`
 * P/E: `pe`
 * Open Price: `open`
